@@ -1,7 +1,7 @@
 // O(n) time | O(n) space
 
 function caesarCipherEncryptor(string, key) {
-  let alpha = 'abcdefghijklmnopqrstuvwxyz'
+    let alpha = 'abcdefghijklmnopqrstuvwxyz'
 	let newStr = '';
 	for (let i = 0; i < string.length; i++) {
 		let oldIndex = alpha.indexOf(string[i]);
