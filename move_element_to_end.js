@@ -8,3 +8,24 @@ function moveElementToEnd(array, toMove) {
 	}
 	return array;
 }
+
+
+// O(n) time | O(1) space
+function moveElementToEnd(array, toMove) {
+	let start = 0;
+	let end = array.length - 1;
+	
+	while (start < end) {
+		while (start < end && array[end] === toMove) end--;
+		if (array[start] === toMove) {
+			let temp = array[end];
+			array[end] = array[start];
+			array[start] = temp;
+		}
+		start++
+	}
+	return array;
+}
+
+// Do not edit the line below.
+exports.moveElementToEnd = moveElementToEnd;
