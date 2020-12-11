@@ -15,3 +15,27 @@ function arrayOfProducts(array) {
 	}
 	return products;
 }
+
+// O(n^2) time | O(n) space
+function arrayOfProducts(array) {
+  let output = []; 
+	
+	
+	for (let i = 0; i < array.length; i++) {
+		let multiple = 1;
+		let j = 0;
+		let num = array[j];
+		while (j < array.length) {
+			if (i !== j) {
+				multiple *= array[j];
+			}
+			j++		
+		}
+		
+		output.push(multiple)
+	}
+	return output;
+}
+
+// Do not edit the line below.
+exports.arrayOfProducts = arrayOfProducts;
