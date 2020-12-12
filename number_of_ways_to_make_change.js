@@ -1,3 +1,5 @@
+// O(nd) time | O(n) space 
+
 function numberOfWaysToMakeChange(n, denoms) { //7 [2,3,4,7]
   // Write your code here.
 	let ways = new Array(n + 1).fill(0); //[1,0,1,1,2,2,3,3]
