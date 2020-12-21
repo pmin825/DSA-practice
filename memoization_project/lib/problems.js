@@ -37,20 +37,34 @@ function lucasNumberMemo(n, memo = {}) {
 // minChange([1, 4, 5], 8))         // => 2, because 4 + 4 = 8
 // minChange([1, 5, 10, 25], 15)    // => 2, because 10 + 5 = 15
 // minChange([1, 5, 10, 25], 100)   // => 4, because 25 + 25 + 25 + 25 = 100
-function minChange(coins, amount) {
-    // if (n in memo) return memo[n];
-    let numCoins = new Array(amount + 1).fill(Infinity);
-    numCoins[0] = 0;
+// function minChange(coins, amount) {
+//     // if (n in memo) return memo[n];
+//     let numCoins = new Array(amount + 1).fill(Infinity);
+//     numCoins[0] = 0;
 
-    for (const denom of coins) {
-        for (let i = 0; i < numCoins.length; i++) {
-            if (denom <= i) {
-                numCoins[i] = Math.min(numCoins[i], numCoins[i - denom] + 1)
-            }
+//     for (const denom of coins) {
+//         for (let i = 0; i < numCoins.length; i++) {
+//             if (denom <= i) {
+//                 numCoins[i] = Math.min(numCoins[i], numCoins[i - denom] + 1)
+//             }
+//         }
+//     }
+//     return numCoins[amount] !== Infinity ? numCoins[amount] : null
+//     // return memo[n];
+// }
+
+function minChange(coins, amount, memo = {}) {
+    if (amount in memo) return memo[amount];
+    if (amount === 0) return 0;
+    let numCoins = [];
+    coins.forEach((coin) => {
+        if (coin <= amount) {
+            numCoins.push(minChange(coins, amount - coin, memo) + 1);
         }
-    }
-    return numCoins[amount] !== Infinity ? numCoins[amount] : null
-    // return memo[n];
+    });
+
+    memo[amount] = Math.min(...numCoins);
+    return memo[amount];
 }
 
 
@@ -58,3 +72,16 @@ module.exports = {
     lucasNumberMemo,
     minChange
 };
+
+var change = function(amount, coins, memo = {}) {
+    let key = amount + '-' + coins
+    if (key in memo) return memo[key];
+    if (amount === 0) return 1;
+    let currentCoin = coins[coins.length - 1];
+    let ways = 0;
+    for (let i = 0; i * currentCoin <= amount; i++) {
+        ways += change(amount - i * currentCoin, coins.slice(0, -1))
+    }
+    memo[key] = ways
+    return memo[key]
+}
