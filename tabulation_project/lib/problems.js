@@ -20,20 +20,38 @@
 // stepper([3, 1, 0, 5, 10]);           // => true, because we can step through elements 3 -> 5 -> 10
 // stepper([3, 4, 1, 0, 10]);           // => true, because we can step through elements 3 -> 4 -> 10
 // stepper([2, 3, 1, 1, 0, 4, 7, 8])    // => false, there is no way to step to the end
-function stepper(nums) {
-    let table = new Array(nums.length).fill(false);
-    table[0] = true;
 
-    for (let i = 0; i < table.length; i++) {
-        if (table[i] === true) {
-            for (let j = 1; j <= nums[i]; j++) {
-                table[j] = true; 
-            }
-        }
+//tabulation
+// function stepper(nums) {
+//     let table = new Array(nums.length).fill(false);
+//     table[0] = true;
+
+//     for (let i = 0; i < table.length; i++) {
+//         if (table[i] === true) {
+//             for (let j = 1; j <= nums[i]; j++) {
+//                 table[j] = true; 
+//             }
+//         }
+//     }
+//     return table[table.length - 1];
+// }
+
+//memoization
+function stepper(nums, memo = {}) {
+    
+    if (nums.length in memo) return memo[nums.length];
+    if (nums.length === 0) return true;
+
+    let maxRange = nums[0];
+    for (let i = 1; i <= maxRange; i++) {
+        if (stepper(nums.slice(i), memo)) {
+            memo[nums.length] = true;
+            return true;
+        } 
     }
-    return table[table.length - 1];
-}
-
+    memo[nums.length] = false;
+    return false;
+ }
 
 // Write a function, maxNonAdjacentSum(nums), that takes in an array of nonnegative numbers.
 // The function should return the maximum sum of elements in the array we can get if we cannot take
