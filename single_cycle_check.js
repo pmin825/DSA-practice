@@ -1,7 +1,7 @@
 function hasSingleCycle(array) {
 	let idx = 0;
 	let count = 0;
-  while (count < array.length) {
+  	while (count < array.length) {
 		if (count > 0 && idx === 0) return false;
 		count++
 		idx = getNextIdx(idx, array);
