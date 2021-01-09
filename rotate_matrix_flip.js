@@ -6,13 +6,7 @@
 //   [13, 14, 15, 16]
 // ]
 
-// Output:
-// [
-//  [13,  9, 5, 1],
-//  [14, 10, 6, 2],
-//  [15, 11, 7, 3],
-//  [16, 12, 8, 4]
-// ]
+
 
 function rotateMatrix(matrix) {
   let length = matrix.length;
