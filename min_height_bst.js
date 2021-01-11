@@ -1,4 +1,4 @@
-// O(n) time | O(n) space
+// O(nLog(n)) time | O(n) space
 
 function minHeightBst(array) {
 	return constructMinHeightBst(array, null, 0, array.length - 1)
