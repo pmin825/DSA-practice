@@ -36,3 +36,11 @@ class BinaryTree {
   exports.BinaryTree = BinaryTree;
   exports.findSuccessor = findSuccessor;
   
+for (const ele of array)
+
+if (ele in hash)
+
+
+for (let i = [key, val]; i < Object.entries(hash); i++) {
+  
+}
