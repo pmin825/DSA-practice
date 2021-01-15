@@ -4,7 +4,6 @@
  */
 
 var decodeString = function(s) {
-    let finalString = '';
     let newString = '';
     let stack = [];
     let multiplier = 0;
