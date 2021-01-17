@@ -3,60 +3,30 @@
  * @return {string[]}
  */
 var findItinerary = function(tickets) {
-    let graph = buildGraph(tickets);
-    let array = ['JFK'];
-    let prevIndex = 0;
-
-    if (tickets.length === 1) return tickets[0]
+    const map = {};
+    const res = [];
     
-    console.log(graph)
-    
-    let idx = 0;
-    let connect = graph['JFK'].sort()[idx]
-    
-    if (!graph[connect]) {
-        connect = graph['JFK'].sort().splice(idx + 1, 1)[0]
-    }   else {
-        connect = graph['JFK'].sort().splice(idx, 1)[0]
+    const dfs = (node) => {
+      const des = map[node];
+      while(map[node] && map[node].length > 0) {
+        dfs(map[node].shift());
+      }
+      // push node to top of array result
+      res.unshift(node);
     }
     
-    while (array.length !== tickets.length + 1) {
-        array.push(connect);
-        if (!graph[connect]) {  
-            
-        }   else {
-            let prev = connect;
-            connect = graph[connect].shift()
-            // console.log(array[prevIndex])
-            // console.log(connect)
-            
-            // if (array[prevIndex] === connect) {
-            //     graph[prev].push(connect);
-            //     connect = graph[prev].splice(idx, 1)[0]
-            // }
-            prevIndex += 1
-
-            if (!graph[connect] && graph[prev].length >= 1) {
-                graph[prev].push(connect);
-                connect = graph[prev].shift()
-            }
-
-        }
-    }
-    return array;
-};
-
-
-var buildGraph = (tickets) => {
-    let graph = {};
     
-    for (let i = 0; i < tickets.length; i++) {
-        let [connect, flight] = tickets[i];
-        if (!(connect in graph)) {
-            graph[connect] = [flight];
-        }   else {
-            graph[connect].push(flight);
-        }
+    // ES6: Destructuring array
+    for (let [dep, des] of tickets) {
+      // Spread syntax
+      map[dep] = [...(map[dep] || []), des];
     }
-    return graph;
-}
+    
+    for (let loc in map) {
+      map[loc].sort();
+    }
+   console.log(map); 
+    dfs('JFK');
+   
+    return res;
+  };
