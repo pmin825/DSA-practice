@@ -7,12 +7,12 @@ var findItinerary = function(tickets) {
     const res = [];
     
     const dfs = (node) => {
-      const des = map[node];
+    //   const des = map[node];
       while(map[node] && map[node].length > 0) {
         dfs(map[node].shift());
       }
       // push node to top of array result
-      res.unshift(node);
+      res.unshift(node);t 
     }
     
     
@@ -25,8 +25,6 @@ var findItinerary = function(tickets) {
     for (let loc in map) {
       map[loc].sort();
     }
-   console.log(map); 
     dfs('JFK');
-   
     return res;
   };
