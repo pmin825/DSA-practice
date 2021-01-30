@@ -1,17 +1,18 @@
 const allPathsSourceTarget = (graph, results = []) => {
-  findPaths([0], 0, graph, results);
+  helper(graph, results, [0], 0);
   return results;
-} 
+}
 
-const findPaths = (currentPath, node, graph, results) => {
-  let lastNodeIndex = graph.length - 1;
-  if (node === lastNodeIndex) {
+const helper = (graph, results, currentPath, node) => {
+  let lastNode = graph.length - 1;
+  if (node === lastNode) {
       results.push(currentPath.slice(0));
-  }   else {
-      for (let i = 0; i < graph[node].length; i++) {
-          currentPath.push(graph[node][i]);
-          findPaths(currentPath, graph[node][i], graph, results);
-          currentPath.pop();
-      }
+      return;
+  }
+  
+  for (let i = 0; i < graph[node].length; i++) {
+      currentPath.push(graph[node][i]);
+      helper(graph, results, currentPath, graph[node][i]);
+      currentPath.pop();
   }
 }
