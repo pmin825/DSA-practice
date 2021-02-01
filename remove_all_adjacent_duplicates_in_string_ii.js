@@ -1,21 +1,20 @@
 const removeDuplicates = (s, k) => {
-  s = s.split("");
-  let check = true;
+  let stack = [];
 
-  while (check) {
-    check = false;
-    for (let i = 0; i < s.length; i++) {
-      console.log(s[i]);
-      if (s.slice(i, i + k).join("") === s[i].repeat(k)) {
-        for (let j = 0; j < k; j++) {
-          s[i + j] = "";
-        }
-        s = s.join("").split("");
-        check = true;
-        break;
+  for (const char of s) {
+    if (stack.length && stack[stack.length - 1][0] === char) {
+      stack[stack.length - 1][1] += 1;
+      if (stack[stack.length - 1][1] === k) {
+        stack.pop();
       }
+    } else {
+      stack.push([char, 1]);
     }
   }
 
-  return s.join("");
+  let string = "";
+  for (let [char, count] of stack) {
+    string += char.repeat(count);
+  }
+  return string;
 };
