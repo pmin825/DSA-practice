@@ -22,33 +22,33 @@ class DoublyLinkedList {
 		}
 		this.insertBefore(this.head, node);
 	}
-	
-	insertBefore(node, nodeToInsert) {
-		if (nodeToInsert === this.head && nodeToInsert === this.tail) return;
-		this.remove(nodeToInsert)
-		nodeToInsert.prev = node.prev;
-		nodeToInsert.next = node;
-		if (node.prev === null) {
-			this.head = nodeToInsert
-		}	else {
-			node.prev.next = nodeToInsert
-		}
-		node.prev = nodeToInsert;
-	}
-	
+
   setTail(node) {
     if (this.tail === null) {
-			this.setHead(node);
-			this.tail = node;
+			this.setHead(node)
+			return;
 		}
 		this.insertAfter(this.tail, node);
 	}
 
+  insertBefore(node, nodeToInsert) {
+  	if (nodeToInsert === this.head && nodeToInsert === this.tail) return;
+		this.remove(nodeToInsert);
+		nodeToInsert.prev = node.prev;
+		nodeToInsert.next = node;
+		if (node.prev === null) {
+			this.head = nodeToInsert;
+		}	else {
+			node.prev.next = nodeToInsert;
+		}
+		node.prev = nodeToInsert;
+	}
+
   insertAfter(node, nodeToInsert) {
-		if (nodeToInsert === this.head && nodeToInsert === this.tail) return;
-		this.remove(nodeToInsert)
-		nodeToInsert.prev = node;
+    if (nodeToInsert === this.head && nodeToInsert === this.tail) return;
+		this.remove(nodeToInsert);
 		nodeToInsert.next = node.next;
+		nodeToInsert.prev = node;
 		if (node.next === null) {
 			this.tail = nodeToInsert;
 		}	else {
@@ -58,15 +58,15 @@ class DoublyLinkedList {
 	}
 
   insertAtPosition(position, nodeToInsert) {
-    if (position === 1) {
-			this.setHead(nodeToInsert)
+		if (position === 1) {
+			this.setHead(nodeToInsert);
 			return;
 		}
-		let node = this.head
-		let currentPosition = 1;
-		while (node !== null && currentPosition !== position) {
-			currentPosition++
-			node = node.next
+		let node = this.head;
+		let currentPos = 1;
+		while (node !== null && currentPos !== position) {
+			currentPos++
+			node = node.next;
 		}
 		if (node !== null) {
 			this.insertBefore(node, nodeToInsert);
@@ -80,15 +80,17 @@ class DoublyLinkedList {
 		while (node !== null) {
 			const nodeToRemove = node;
 			node = node.next;
-			if (nodeToRemove.value === value) this.remove(nodeToRemove)
+			if (nodeToRemove.value === value) {
+				this.remove(nodeToRemove);
+			}
 		}
 	}
 
   remove(node) {
-    if (node === this.head) this.head = this.head.next;
+		if (node === this.head) this.head = this.head.next;
 		if (node === this.tail) this.tail = this.tail.prev;
 		this.removeNodeBindings(node);
-  }
+	}
 	
 	removeNodeBindings(node) {
 		if (node.prev !== null) node.prev.next = node.next;
@@ -98,14 +100,10 @@ class DoublyLinkedList {
 	}
 	
   containsNodeWithValue(value) {
-    let node = this.head;
+  	let node = this.head;
 		while (node !== null && node.value !== value) {
 			node = node.next;
 		}
-		return node !== null;
+		return node !== null
 	}
 }
-
-// Do not edit the lines below.
-exports.Node = Node;
-exports.DoublyLinkedList = DoublyLinkedList;
