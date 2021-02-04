@@ -23,7 +23,7 @@ const merge = (intervals) => {
     let start = intervals[0][0];
     let end = intervals[0][1];
 
-    for (let i = 0; i < intervals.length; i++) {
+    for (let i = 1; i < intervals.length; i++) {
         let interval = intervals[i];
         let checkStart = interval[0];
         let checkEnd = interval[1];
