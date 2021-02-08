@@ -1,7 +1,6 @@
 const totalFruit = (tree) => {
     if (!tree) return 0;
     if (tree.length < 3) return tree.length;
-    
     let max = 0;
     let prevIndex = 0;
     let firstTypeIndex = 0;
