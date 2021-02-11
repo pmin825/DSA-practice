@@ -6,7 +6,7 @@ function staircaseTraversal(height, maxSteps) {
     for (let i = 2; i <= height; i++) {
         let step = 1;
         while (step <= maxSteps && step <= i) {
-            numWays[i] = numWays[i] + numWays[i - step];
+            numWays[i] += numWays[i - step];
             step += 1;
         }
     }
