@@ -1,17 +1,18 @@
 function riverSizes(matrix) {
-    const sizes = [];
+    const rivers = [];
     const visited = matrix.map((row) => row.map((value) => false));
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[0].length; j++) {
-            if (visited[i][j]) continue;
-            traverseNode(i, j, matrix, visited, sizes);
+            if (matrix[i][j] === 1) {
+                countRivers(i, j, matrix, visited, rivers);
+            }
         }
     }
-    return sizes;
+    return rivers;
 }
 
-function traverseNode(i, j, matrix, visited, sizes) {
-    let currentRiverSize = 0;
+function countRivers(i, j, matrix, visited, rivers) {
+    let size = 0;
     const nodesToExplore = [[i, j]];
     while (nodesToExplore.length) {
         const currentNode = nodesToExplore.pop();
@@ -20,13 +21,13 @@ function traverseNode(i, j, matrix, visited, sizes) {
         if (visited[i][j]) continue;
         visited[i][j] = true;
         if (matrix[i][j] === 0) continue;
-        currentRiverSize++;
+        size++;
         const unvisitedNeighbors = getUnvisitedNeighbors(i, j, matrix, visited);
         for (const neighbor of unvisitedNeighbors) {
             nodesToExplore.push(neighbor);
         }
     }
-    if (currentRiverSize > 0) sizes.push(currentRiverSize);
+    if (size > 0) rivers.push(size);
 }
 
 function getUnvisitedNeighbors(i, j, matrix, visited) {
@@ -39,6 +40,3 @@ function getUnvisitedNeighbors(i, j, matrix, visited) {
         unvisitedNeighbors.push([i, j + 1]);
     return unvisitedNeighbors;
 }
-
-// Do not edit the line below.
-exports.riverSizes = riverSizes;
