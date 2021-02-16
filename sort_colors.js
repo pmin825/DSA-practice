@@ -33,7 +33,7 @@
 //     return nums;
 // };
 
-function sortColors(nums) {
+const sortColors = (nums) => {
     let low = 0,
         high = nums.length - 1;
 
@@ -47,4 +47,4 @@ function sortColors(nums) {
             i--;
         }
     }
-}
+};
