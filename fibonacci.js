@@ -1,42 +1,11 @@
-//recursive
+function getNthFib(n) {
+    let fibs = [0, 1];
+    if (n === 1) return 0;
 
-function fib(n) {
-    if (n === 0) return 0;
-    if (n === 1) return 1;
-    return fib(n-1) + fib(n-2);    
-}
-
-//iterative
-
-function fib(n) {
-    const fibs = [0, 1];
-    let counter = 2;
-    while (counter <= n) {
+    for (let i = 2; i < n; i++) {
         let temp = fibs[1];
         fibs[1] = fibs[0] + fibs[1];
         fibs[0] = temp;
-        counter++
     }
-    if (n < 1) return fibs[0]
     return fibs[1];
-}
-
-function memoize(fn) {
-    const cache = {};
-    return function(...args) {
-        if (cache[args]) return cache[args];
-        const result = fn.apply(this, args)
-        cache[args] = result;
-        return result;
-    }
-}
-
-fib = memoize(fib);
-
-function fib(n, memo = {}) {
-    if (n in memo) return memo[n];
-    if (n === 0) return 0;
-    if (n === 1) return 1;
-    memo[n] = fib(n-1, memo) + fib(n-2, memo);
-    return memo[n];
 }
