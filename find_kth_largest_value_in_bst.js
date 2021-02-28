@@ -19,3 +19,5 @@ function inOrderTraverse(node, sortedNodeValues) {
     sortedNodeValues.push(node.value);
     inOrderTraverse(node.right, sortedNodeValues);
 }
+
+
