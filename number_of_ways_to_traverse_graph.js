@@ -16,14 +16,14 @@ function numberOfWaysToTraverseGraph(width, height) {
         }
     }
 
-    for (let i = 1; i < width + 1; i++) {
-        for (let j = 1; j < height + 1; j++) {
+    for (let i = 1; i < height + 1; i++) {
+        for (let j = 1; j < width + 1; j++) {
             if (i === 1 || j === 1) {
-                numWays[j][i] = 1;
+                numWays[i][j] = 1;
             } else {
-                const waysLeft = numWays[j][i - 1];
-                const waysUp = numWays[j - 1][i];
-                numWays[j][i] = waysLeft + waysUp;
+                const waysLeft = numWays[i][j - 1];
+                const waysUp = numWays[i - 1][j];
+                numWays[i][j] = waysLeft + waysUp;
             }
         }
     }
