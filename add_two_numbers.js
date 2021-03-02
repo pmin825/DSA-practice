@@ -1,5 +1,4 @@
 const addTwoNumbers = (l1, l2) => {
-    const results = [];
     let carry = 0;
     let node1 = l1;
     let node2 = l2;
@@ -46,6 +45,7 @@ const addTwoNumbers = (l1, l2) => {
         final.next = new ListNode(sum);
         final = final.next;
     }
+    
     if (carry > 0) final.next = new ListNode(carry);
     return head.next;
 };
