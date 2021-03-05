@@ -1,5 +1,5 @@
 const lengthOfLIS = (nums) => {
-  var n = nums.length;
+  const n = nums.length;
   if (!n) return 0;
   let len = 1;
   const dp = [nums[0]];
