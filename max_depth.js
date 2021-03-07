@@ -1,6 +1,8 @@
-const maxDepth = (root) => {
-    if (!root) {
-        return 0;
-    }
-    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+const maxDepth = (root, depth = 0) => {
+  if (!root) return depth;
+
+  return Math.max(
+    maxDepth(root.left, depth + 1),
+    maxDepth(root.right, depth + 1)
+  );
 };
