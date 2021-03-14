@@ -1,15 +1,12 @@
-function groupAnagrams(words) {
-  let hash = {}; // {}
-  for (const word of words) {
-    let sortWord = word.split("").sort().join("");
-    if (!hash[sortWord]) {
-      hash[sortWord] = [word];
-    } else {
-      hash[sortWord].push(word);
+const groupAnagrams = (strs) => {
+    const hash = {};
+    for (const str of strs) {
+        const key = str.split("").sort().join("");
+        if (!hash[key]) {
+            hash[key] = [str];
+        } else {
+            hash[key].push(str);
+        }
     }
-  }
-  return Object.values(hash);
-}
-
-// Do not edit the line below.
-exports.groupAnagrams = groupAnagrams;
+    return Object.values(hash);
+};
