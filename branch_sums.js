@@ -8,17 +8,16 @@ class BinaryTree {
 
 function branchSums(root) {
     const sums = [];
-    helper(root, 0, sums);
+    branchSumsHelper(root, 0, sums);
     return sums;
 }
 
-function helper(node, runningSum, sums) {
-    if (!node) return;
-    const newRunningSum = runningSum + node.value;
-    if (!node.left && !node.right) {
-        sums.push(newRunningSum);
-        return;
-    }
-    helper(node.left, newRunningSum, sums);
-    helper(node.right, newRunningSum, sums);
+function branchSumsHelper(node, runningSum, sums) {
+    if (node === null) return;
+
+    let newRunningSum = runningSum + node.value;
+    if (node.left === null && node.right === null) sums.push(newRunningSum);
+
+    branchSumsHelper(node.left, newRunningSum, sums);
+    branchSumsHelper(node.right, newRunningSum, sums);
 }
