@@ -16,25 +16,21 @@
 //  [16, 12, 8, 4]
 // ]
 
-function rotateMatrix(matrix) {
-  let length = matrix.length;
-
-  for (let row = 0; row < length; row++) {
-    for (let col = row; col < length; col++) {
-      let temp = matrix[row][col];
-      matrix[row][col] = matrix[col][row];
-      matrix[col][row] = temp;
+const rotate = (matrix) => {
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = i; j < matrix[0].length; j++) {
+            let temp = matrix[i][j];
+            matrix[i][j] = matrix[j][i];
+            matrix[j][i] = temp;
+        }
     }
-  }
-
-  for (let row = 0; row < length; row++) {
-    for (let col = 0; col < Math.floor(length / 2); col++) {
-      let temp = matrix[row][col];
-      matrix[row][col] = matrix[row][length - 1 - col];
-      matrix[row][length - 1 - col] = temp;
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < Math.floor(matrix[0].length / 2); j++) {
+            let temp = matrix[i][j];
+            matrix[i][j] = matrix[i][matrix[0].length - 1 - j];
+            matrix[i][matrix[0].length - 1 - j] = temp;
+        }
     }
-  }
-  return matrix;
-}
+};
 
 rotateMatrix(matrix);
