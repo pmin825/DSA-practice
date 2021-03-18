@@ -1,20 +1,17 @@
 function generateDocument(characters, document) {
-  const count = {};
-  for (const char of characters) {
-    if (!count[char]) {
-      count[char] = 1;
-    } else {
-      count[char] += 1;
+    let count = {};
+    for (let i = 0; i < characters.length; i++) {
+        let char = characters[i];
+        !count[char] ? (count[char] = 1) : (count[char] += 1);
     }
-  }
-
-  for (const char of document) {
-    if (!count[char]) {
-      return false;
-    } else {
-      count[char] -= 1;
-      if (count[char] < 0) return false;
+    for (let i = 0; i < document.length; i++) {
+        let char = document[i];
+        if (!count[char]) {
+            return false;
+        } else {
+            count[char] -= 1;
+            if (count[char] < 0) return false;
+        }
     }
-  }
-  return true;
+    return true;
 }
