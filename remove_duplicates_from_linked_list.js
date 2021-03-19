@@ -8,18 +8,13 @@ class LinkedList {
 
 function removeDuplicatesFromLinkedList(linkedList) {
     let node = linkedList;
-
     while (node !== null) {
-        let nextNode = node.next;
-        while (nextNode !== null && nextNode.value === node.value) {
-            nextNode = nextNode.next;
+        let current = node;
+        while (current.next && current.value === current.next.value) {
+            current = current.next;
         }
-        node.next = nextNode;
+        node.next = current.next;
         node = node.next;
     }
     return linkedList;
 }
-
-// Do not edit the lines below.
-exports.LinkedList = LinkedList;
-exports.removeDuplicatesFromLinkedList = removeDuplicatesFromLinkedList;
