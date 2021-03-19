@@ -10,15 +10,12 @@ function removeDuplicatesFromLinkedList(linkedList) {
     let node = linkedList;
 
     while (node !== null) {
-        let nextDistinctNode = node.next;
-        while (
-            nextDistinctNode !== null &&
-            nextDistinctNode.value === node.value
-        ) {
-            nextDistinctNode = nextDistinctNode.next;
+        let nextNode = node.next;
+        while (nextNode !== null && nextNode.value === node.value) {
+            nextNode = nextNode.next;
         }
-        node.next = nextDistinctNode;
-        node = nextDistinctNode;
+        node.next = nextNode;
+        node = node.next;
     }
     return linkedList;
 }
