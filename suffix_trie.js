@@ -14,8 +14,10 @@ class SuffixTrie {
     insertSubstringAt(i, string) {
         let node = this.root;
         for (let j = i; j < string.length; j++) {
-            const char = string[j];
-            if (!node[char]) node[char] = {};
+            let char = string[j];
+            if (!node[char]) {
+                node[char] = {};
+            }
             node = node[char];
         }
         node[this.endSymbol] = true;
@@ -27,6 +29,6 @@ class SuffixTrie {
             if (!node[char]) return false;
             node = node[char];
         }
-        return !!node[this.endSymbol];
+        return node[this.endSymbol] === true;
     }
 }
