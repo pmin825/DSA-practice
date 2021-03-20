@@ -11,7 +11,7 @@ const removeDuplicateLetters = (s) => {
             stack.pop();
         }
         stack.push(char);
-        console.log(stack);
     }
+
     return stack.join("");
 };
