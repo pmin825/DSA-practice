@@ -19,5 +19,6 @@ function longestPeak(array) {
         longest = Math.max(longest, right - left + 1);
         i = right + 1;
     }
+	
     return longest;
 }
