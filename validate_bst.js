@@ -1,3 +1,4 @@
+// This is an input class. Do not edit.
 class BST {
     constructor(value) {
         this.value = value;
@@ -7,15 +8,15 @@ class BST {
 }
 
 function validateBst(tree) {
-    return validateHelper(tree, -Infinity, Infinity);
+    return validateBstHelper(tree, -Infinity, Infinity);
 }
 
-function validateHelper(tree, min, max) {
+function validateBstHelper(tree, min, max) {
     if (tree === null) return true;
-    if (tree.value >= max || tree.value < min) return false;
+    if (tree.value < min || tree.value >= max) return false;
 
     return (
-        validateHelper(tree.left, min, tree.value) &&
-        validateHelper(tree.right, tree.value, max)
+        validateBstHelper(tree.left, min, tree.value) &&
+        validateBstHelper(tree.right, tree.value, max)
     );
 }
