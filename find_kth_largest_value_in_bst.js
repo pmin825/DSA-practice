@@ -1,3 +1,4 @@
+// This is an input class. Do not edit.
 class BST {
     constructor(value) {
         this.value = value;
@@ -7,17 +8,14 @@ class BST {
 }
 
 function findKthLargestValueInBst(tree, k) {
-    const sortedNodeValues = [];
-    inOrderTraverse(tree, sortedNodeValues);
-    return sortedNodeValues[sortedNodeValues.length - k];
+    const sorted = [];
+    return helper(tree, k, sorted);
 }
 
-function inOrderTraverse(node, sortedNodeValues) {
-    if (node === null) return;
-
-    inOrderTraverse(node.left, sortedNodeValues);
-    sortedNodeValues.push(node.value);
-    inOrderTraverse(node.right, sortedNodeValues);
+function helper(tree, k, sorted) {
+    if (tree === null) return null;
+    helper(tree.left, k, sorted);
+    sorted.push(tree.value);
+    helper(tree.right, k, sorted);
+    return sorted[sorted.length - k];
 }
-
-
