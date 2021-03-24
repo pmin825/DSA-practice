@@ -1,89 +1,36 @@
-// O(nLog(n)) time | O(n) space
-
 function minHeightBst(array) {
-	return constructMinHeightBst(array, null, 0, array.length - 1)
+    return constructBst(array, 0, array.length - 1);
 }
 
-function constructMinHeightBst(array, bst, startIdx, endIdx) {
-	if (startIdx > endIdx) return;
-	const midIdx = Math.floor((startIdx + endIdx) / 2);
-	const valueToAdd = array[midIdx];
-	
-	if (bst === null) {
-		bst = new BST(valueToAdd);
-	}	else {
-		bst.insert(valueToAdd);
-	}
-	constructMinHeightBst(array, bst, startIdx, midIdx - 1);
-	constructMinHeightBst(array, bst, midIdx + 1, endIdx);
-	return bst;
+function constructBst(array, start, end) {
+    if (start > end) return null;
+    const mid = Math.floor((start + end) / 2);
+    const bst = new BST(array[mid]);
+    bst.left = constructBst(array, start, mid - 1);
+    bst.right = constructBst(array, mid + 1, end);
+    return bst;
 }
 
 class BST {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
-
-  insert(value) {
-    if (value < this.value) {
-      if (this.left === null) {
-        this.left = new BST(value);
-      } else {
-        this.left.insert(value);
-      }
-    } else {
-      if (this.right === null) {
-        this.right = new BST(value);
-      } else {
-        this.right.insert(value);
-      }
-    }
-  }
-}
-
-// Do not edit the line below.
-exports.minHeightBst = minHeightBst;
-
-// O(n) time || O(n) space
-
-function minHeightBst(array) {
-    return constructMinHeightBst(array, 0, array.length - 1)
-  }
-  
-  function constructMinHeightBst(array, startIdx, endIdx) {
-      if (startIdx > endIdx) return null;
-      const midIdx = Math.floor((startIdx + endIdx)/2);
-      const bst = new BST(array[midIdx]);
-      bst.left = constructMinHeightBst(array, startIdx, midIdx - 1);
-      bst.right = constructMinHeightBst(array, midIdx + 1, endIdx);
-      return bst
-  }
-  
-  class BST {
     constructor(value) {
-      this.value = value;
-      this.left = null;
-      this.right = null;
+        this.value = value;
+        this.left = null;
+        this.right = null;
     }
-  
+
     insert(value) {
-      if (value < this.value) {
-        if (this.left === null) {
-          this.left = new BST(value);
+        if (value < this.value) {
+            if (this.left === null) {
+                this.left = new BST(value);
+            } else {
+                this.left.insert(value);
+            }
         } else {
-          this.left.insert(value);
+            if (this.right === null) {
+                this.right = new BST(value);
+            } else {
+                this.right.insert(value);
+            }
         }
-      } else {
-        if (this.right === null) {
-          this.right = new BST(value);
-        } else {
-          this.right.insert(value);
-        }
-      }
     }
-  }
-  
-  // Do not edit the line below.
-  exports.minHeightBst = minHeightBst;
+}
