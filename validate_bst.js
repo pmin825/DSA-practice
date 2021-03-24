@@ -7,16 +7,15 @@ class BST {
 }
 
 function validateBst(tree) {
-    return validateBstHelper(tree, -Infinity, Infinity);
+    return validateHelper(tree, -Infinity, Infinity);
 }
 
-function validateBstHelper(tree, min, max) {
+function validateHelper(tree, min, max) {
     if (tree === null) return true;
-    if (tree.value >= max) return false;
-    if (tree.value < min) return false;
+    if (tree.value >= max || tree.value < min) return false;
 
     return (
-        validateBstHelper(tree.left, min, tree.value) &&
-        validateBstHelper(tree.right, tree.value, max)
+        validateHelper(tree.left, min, tree.value) &&
+        validateHelper(tree.right, tree.value, max)
     );
 }
