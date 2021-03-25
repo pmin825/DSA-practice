@@ -2,14 +2,15 @@
 
 function invertBinaryTree(tree) {
     let queue = [tree];
-    while (queue.length) {
-        let node = queue.shift();
-        if (node === null) continue;
-        let temp = node.left;
-        node.left = node.right;
-        node.right = temp;
+    while (queue.length > 0) {
+        let current = queue.shift();
+        if (!current) continue;
+        let temp = current.left;
+        current.left = current.right;
+        current.right = temp;
 
-        queue.push(node.left, node.right);
+        queue.push(current.left);
+        queue.push(current.right);
     }
 }
 
