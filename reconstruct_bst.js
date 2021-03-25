@@ -1,3 +1,4 @@
+// This is an input class. Do not edit.
 class BST {
     constructor(value, left = null, right = null) {
         this.value = value;
@@ -7,22 +8,19 @@ class BST {
 }
 
 function reconstructBst(preOrderTraversalValues) {
-    const currentValue = preOrderTraversalValues[0];
-    if (preOrderTraversalValues.length === 0) return null;
-    let rightIdx = preOrderTraversalValues.length;
+    if (!preOrderTraversalValues.length) return null;
+    let node = preOrderTraversalValues[0];
+    let right = preOrderTraversalValues.length;
 
     for (let i = 1; i < preOrderTraversalValues.length; i++) {
-        const value = preOrderTraversalValues[i];
-        if (value >= currentValue) {
-            rightIdx = i;
+        let nextNode = preOrderTraversalValues[i];
+
+        if (nextNode >= node) {
+            right = i;
             break;
         }
     }
-    const leftSubTree = reconstructBst(
-        preOrderTraversalValues.slice(1, rightIdx)
-    );
-    const rightSubTree = reconstructBst(
-        preOrderTraversalValues.slice(rightIdx)
-    );
-    return new BST(currentValue, leftSubTree, rightSubTree);
+    const leftSubTree = reconstructBst(preOrderTraversalValues.slice(1, right));
+    const rightSubTree = reconstructBst(preOrderTraversalValues.slice(right));
+    return new BST(node, leftSubTree, rightSubTree);
 }
