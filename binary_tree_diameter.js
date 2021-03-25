@@ -10,29 +10,6 @@ class BinaryTree {
     }
 }
 
-function binaryTreeDiameter(tree) {
-    return getTreeInfo(tree).diameter;
-}
-
-function getTreeInfo(tree) {
-    if (tree === null) {
-        return new TreeInfo(0, 0);
-    }
-
-    let leftTreeInfo = getTreeInfo(tree.left);
-    let rightTreeInfo = getTreeInfo(tree.right);
-
-    let longestPathThroughRoot = leftTreeInfo.height + rightTreeInfo.height;
-    let currentMaxDiameter = Math.max(
-        leftTreeInfo.diameter,
-        rightTreeInfo.diameter
-    );
-    let currentDiameter = Math.max(longestPathThroughRoot, currentMaxDiameter);
-    let currentHeight = Math.max(leftTreeInfo.height, rightTreeInfo.height);
-
-    return new TreeInfo(currentDiameter, currentHeight + 1);
-}
-
 class TreeInfo {
     constructor(diameter, height) {
         this.diameter = diameter;
@@ -40,6 +17,22 @@ class TreeInfo {
     }
 }
 
-// Do not edit the line below.
-exports.binaryTreeDiameter = binaryTreeDiameter;
-exports.BinaryTree = BinaryTree;
+function binaryTreeDiameter(tree) {
+    return getTreeInfo(tree).diameter;
+}
+
+function getTreeInfo(tree) {
+    if (tree === null) return new TreeInfo(0, 0);
+
+    const leftSubTree = getTreeInfo(tree.left);
+    const rightSubTree = getTreeInfo(tree.right);
+    const longestPathThruRoot = leftSubTree.height + rightSubTree.height;
+    const currentMaxDiameter = Math.max(
+        longestPathThruRoot,
+        leftSubTree.diameter,
+        rightSubTree.diameter
+    );
+    const currentHeight = 1 + Math.max(leftSubTree.height, rightSubTree.height);
+
+    return new TreeInfo(currentMaxDiameter, currentHeight);
+}
