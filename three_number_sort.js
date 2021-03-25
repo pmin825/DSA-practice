@@ -1,25 +1,18 @@
 function threeNumberSort(array, order) {
-    const first = order[0];
-    const second = order[1];
-
-    let firstIdx = 0;
-    let secondIdx = 0;
-    let thirdIdx = array.length - 1;
-
-    while (secondIdx <= thirdIdx) {
-        if (array[secondIdx] === first) {
-            let temp = array[secondIdx];
-            array[secondIdx] = array[firstIdx];
-            array[firstIdx] = temp;
-            firstIdx++;
-            secondIdx++;
-        } else if (array[secondIdx] === second) {
-            secondIdx++;
-        } else {
-            let temp = array[thirdIdx];
-            array[thirdIdx] = array[secondIdx];
-            array[secondIdx] = temp;
-            thirdIdx--;
+    let left = 0;
+    let right = array.length - 1;
+    for (let i = 0; i < array.length; i++) {
+        let num = array[i];
+        if (num === order[0]) {
+            [array[left], array[i]] = [array[i], array[left]];
+            left++;
+        }
+    }
+    for (let i = array.length - 1; i >= 0; i--) {
+        let num = array[i];
+        if (num === order[2]) {
+            [array[right], array[i]] = [array[i], array[right]];
+            right--;
         }
     }
     return array;
