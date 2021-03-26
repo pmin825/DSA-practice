@@ -1,16 +1,15 @@
 // O(n) time | O(n) space
 
 function invertBinaryTree(tree) {
-    let queue = [tree];
-    while (queue.length > 0) {
+    let node = tree;
+    const queue = [node];
+    while (queue.length) {
         let current = queue.shift();
-        if (!current) continue;
+        if (current === null) continue;
         let temp = current.left;
         current.left = current.right;
         current.right = temp;
-
-        queue.push(current.left);
-        queue.push(current.right);
+        queue.push(current.left, current.right);
     }
 }
 
