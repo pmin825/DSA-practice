@@ -1,3 +1,5 @@
+// O(n) time O(n) space
+
 function largestRange(array) {
     let bestRange = [];
     let longest = 0;
