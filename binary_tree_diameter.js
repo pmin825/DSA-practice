@@ -24,15 +24,15 @@ function binaryTreeDiameter(tree) {
 function getTreeInfo(tree) {
     if (tree === null) return new TreeInfo(0, 0);
 
-    const leftSubTree = getTreeInfo(tree.left);
-    const rightSubTree = getTreeInfo(tree.right);
-    const longestPathThruRoot = leftSubTree.height + rightSubTree.height;
-    const currentMaxDiameter = Math.max(
-        longestPathThruRoot,
-        leftSubTree.diameter,
-        rightSubTree.diameter
+    const leftSubtree = getTreeInfo(tree.left);
+    const rightSubtree = getTreeInfo(tree.right);
+    const diameterThruRoot = leftSubtree.height + rightSubtree.height;
+    const maxDiameter = Math.max(
+        diameterThruRoot,
+        leftSubtree.diameter,
+        rightSubtree.diameter
     );
-    const currentHeight = 1 + Math.max(leftSubTree.height, rightSubTree.height);
+    const currentHeight = Math.max(leftSubtree.height, rightSubtree.height);
 
-    return new TreeInfo(currentMaxDiameter, currentHeight);
+    return new TreeInfo(maxDiameter, currentHeight + 1);
 }
