@@ -1,3 +1,4 @@
+// This is an input class. Do not edit.
 class BinaryTree {
     constructor(value) {
         this.value = value;
@@ -9,25 +10,21 @@ class BinaryTree {
 
 function findSuccessor(tree, node) {
     if (node.right !== null) return leftMostChild(node.right);
-    return rightMostChild(node);
+    return rightMostParent(node);
 }
 
 function leftMostChild(node) {
-    let currentNode = node;
-    while (currentNode.left != null) {
-        currentNode = currentNode.left;
+    let current = node;
+    while (current.left !== null) {
+        current = current.left;
     }
-    return currentNode;
+    return current;
 }
 
-function rightMostChild(node) {
-    let currentNode = node;
-    while (
-        currentNode.parent !== null &&
-        currentNode.parent.right === currentNode
-    ) {
-        currentNode = currentNode.parent;
+function rightMostParent(node) {
+    let current = node;
+    while (current.parent !== null && current.parent.right === node) {
+        current = current.parent;
     }
-
-    return currentNode.parent;
+    return current.parent;
 }
