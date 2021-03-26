@@ -29,3 +29,32 @@ function largestRange(array) {
     }
     return bestRange;
 }
+
+// console.log(largestRange([1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]))
+
+
+// alternate solution
+function largestRange(array) {
+    let set = new Set(array);
+      let sorted = Array.from(set).sort((a,b) => a-b);
+      let longest = 0;
+      let range = [];
+      
+      let count = 1;
+      let start;
+      if (sorted.length === 1) return [sorted[0], sorted[0]]
+      for (let i = 0; i < sorted.length; i++) {
+          if (count === 1) start = sorted[i];
+          if (sorted[i] + 1 === sorted[i + 1]) {
+              count += 1;
+          }	else {
+              count = 1;
+          }
+          if (count > longest) {
+              range = [start, sorted[i + 1]];
+              longest = count;
+          }
+      }
+      return range;
+  }
+
