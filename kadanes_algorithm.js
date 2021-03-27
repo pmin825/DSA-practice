@@ -1,17 +1,15 @@
 // O(n) time O(1) space
 
 function kadanesAlgorithm(array) {
-  let maxSum = array[0];
-	let currentSum = 0; 
-	
-	for (const num of array) {
-		if (currentSum + num > num) {
-			currentSum = currentSum + num; 
-		}	else {
-			currentSum = num;
-		}
-		
-		maxSum = Math.max(currentSum, maxSum);
-	}
-	return maxSum;
+    let maxSum = -Infinity;
+    let currentSum = 0;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] + currentSum < array[i]) {
+            currentSum = array[i];
+        } else {
+            currentSum += array[i];
+        }
+        maxSum = Math.max(maxSum, currentSum);
+    }
+    return maxSum;
 }
