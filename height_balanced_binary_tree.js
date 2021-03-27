@@ -7,29 +7,29 @@ class BinaryTree {
 }
 
 class TreeInfo {
-    constructor(isBalanced, height) {
-        this.isBalanced = isBalanced;
+    constructor(height, isBalanced) {
         this.height = height;
+        this.isBalanced = isBalanced;
     }
 }
 
 function heightBalancedBinaryTree(tree) {
-    const treeInfo = getTreeInfo(tree);
-    return treeInfo.isBalanced;
+    return balanceCheck(tree).isBalanced;
 }
 
-function getTreeInfo(node) {
-    if (node === null) return new TreeInfo(true, -1);
-
-    const leftSubtreeInfo = getTreeInfo(node.left);
-    const rightSubtreeInfo = getTreeInfo(node.right);
+function balanceCheck(tree) {
+    if (tree === null) return new TreeInfo(-1, true);
 
     const isBalanced =
-        leftSubtreeInfo.isBalanced &&
-        rightSubtreeInfo.isBalanced &&
-        Math.abs(leftSubtreeInfo.height - rightSubtreeInfo.height) <= 1;
+        balanceCheck(tree.left).isBalanced &&
+        balanceCheck(tree.right).isBalanced &&
+        Math.abs(
+            balanceCheck(tree.left).height - balanceCheck(tree.right).height
+        ) <= 1;
 
-    const height =
-        Math.max(leftSubtreeInfo.height, rightSubtreeInfo.height) + 1;
-    return new TreeInfo(isBalanced, height);
+    const height = Math.max(
+        balanceCheck(tree.left).height,
+        balanceCheck(tree.right).height
+    );
+    return new TreeInfo(height + 1, isBalanced);
 }
