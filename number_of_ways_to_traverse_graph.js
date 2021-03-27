@@ -1,12 +1,5 @@
 function numberOfWaysToTraverseGraph(width, height) {
-    const numWays = [];
-    for (let i = 0; i <= height; i++) {
-        let row = [];
-        for (let j = 0; j <= width; j++) {
-            row.push(0);
-        }
-        numWays.push(row);
-    }
+    const numWays = Array.from(Array(height + 1), () => new Array(width + 1));
 
     for (let i = 1; i <= height; i++) {
         for (let j = 1; j <= width; j++) {
