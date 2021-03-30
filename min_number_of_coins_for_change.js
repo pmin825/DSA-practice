@@ -5,14 +5,11 @@ function minNumberOfCoinsForChange(n, denoms) {
     numCoins[0] = 0;
 
     for (const denom of denoms) {
-        for (let amount = 1; amount <= n; amount++) {
-            if (denom <= amount) {
-                numCoins[amount] = Math.min(
-                    numCoins[amount],
-                    numCoins[amount - denom] + 1
-                );
+        for (let i = 1; i <= n; i++) {
+            if (denom <= i) {
+                numCoins[i] = Math.min(numCoins[i], numCoins[i - denom] + 1);
             }
         }
     }
-    return numCoins[n] === Infinity ? -1 : numCoins[n];
+    return numCoins[n] !== Infinity ? numCoins[n] : -1;
 }
