@@ -10,3 +10,25 @@ const lengthOfLongestSubstring = (s) => {
   }
   return max;
 }
+
+//alternate solution
+const lengthOfLongestSubstring = (s) => {
+  let longest = 0; // 3 
+  let set = new Set(); // {  }
+  for (let i = 0; i < s.length; i++) { // 1
+      let count = 0; // 0,  
+      for (let j = i; j < s.length; j++) {
+          const char = s[j]; // b
+          if (set.has(char)) {
+              set = new Set();
+              break;
+          }   else {
+              set.add(char);
+              count++;
+          }
+          longest = Math.max(longest, count);
+      }
+  }
+  
+  return longest;
+};
