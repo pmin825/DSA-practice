@@ -12,17 +12,17 @@
 // };
 
 function reverseLinkedList(head) {
-	let node = head;
-	const values = [];
-	while (node.next !== null) {
-		values.push(node);
-		node = node.next;
-	}
-	head = node;
-	while (values.length) {
-		node.next = values.pop();
-		node = node.next;
-	}
-	node.next = null;
-	return head;
+  let node = head;
+  const values = [];
+  while (node.next !== null) {
+    values.push(node);
+    node = node.next;
+  }
+  head = node;
+  while (values.length) {
+    node.next = values.pop();
+    node = node.next;
+  }
+  node.next = null;
+  return head;
 }
