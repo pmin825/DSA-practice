@@ -7,18 +7,19 @@ class BST {
 }
 
 function reconstructBst(preOrderTraversalValues) {
-  if (preOrderTraversalValues.length === 0) return null;
   const node = preOrderTraversalValues[0];
-  let rightIdx = preOrderTraversalValues.length;
-
-  for (let i = 1; i < preOrderTraversalValues.length; i++) {
-    const value = preOrderTraversalValues[i];
-    if (value >= node) {
-      rightIdx = i;
-      break;
-    }
-  }
-  const leftSub = reconstructBst(preOrderTraversalValues.slice(1, rightIdx));
-  const rightSub = reconstructBst(preOrderTraversalValues.slice(rightIdx));
-  return new BST(node, leftSub, rightSub);
+	if (preOrderTraversalValues.length === 0) return null;
+	let rightIdx = preOrderTraversalValues.length;
+	
+	for (let i = 1; i < preOrderTraversalValues.length; i++) {
+		const num = preOrderTraversalValues[i];
+		if (num >= node) {
+			rightIdx = i;
+			break;
+		}	
+	}
+	
+	const leftSub = reconstructBst(preOrderTraversalValues.slice(1, rightIdx))
+	const rightSub = reconstructBst(preOrderTraversalValues.slice(rightIdx))
+	return new BST(node, leftSub, rightSub)
 }
