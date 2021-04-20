@@ -1,27 +1,17 @@
 function longestSubstringWithoutDuplication(string) {
-  let max = -Infinity;
-  let maxStr;
+  let startIdx = 0;
+  let lastSeen = {};
+  let longest = [0, 1];
+
   for (let i = 0; i < string.length; i++) {
-    for (let j = 0; j < string.length; j++) {
-      const sub = string.substring(i, j + 1);
-      if (!hasDupes(sub)) {
-        if (sub.length > max) {
-          max = sub.length;
-          maxStr = sub;
-        }
-      }
+    const char = string[i];
+    if (char in lastSeen) {
+      startIdx = Math.max(startIdx, lastSeen[char] + 1);
     }
+    if (longest[1] - longest[0] < i + 1 - startIdx) {
+      longest = [startIdx, i + 1];
+    }
+    lastSeen[char] = i;
   }
-  return maxStr;
-}
-
-function hasDupes(substring) {
-  const set = new Set();
-
-  for (let i = 0; i < substring.length; i++) {
-    const char = substring[i];
-    if (set.has(char)) return true;
-    set.add(char);
-  }
-  return false;
+  return string.slice(longest[0], longest[1]);
 }
