@@ -1,3 +1,5 @@
+// bfs
+
 const rangeSumBST = (root, low, high) => {
     const q = [root];
     let sum = 0;
@@ -11,4 +13,22 @@ const rangeSumBST = (root, low, high) => {
     }
 
     return sum;
+};
+
+//dfs
+
+const rangeSumBST = (root, low, high) => {
+    return rangeSumHelper(root, low, high);
+};
+
+const rangeSumHelper = (node, low, high, sum = { total: 0 }) => {
+    if (!node) return sum.total;
+
+    if (node.val >= low && node.val <= high) {
+        sum.total += node.val;
+    }
+
+    rangeSumHelper(node.left, low, high, sum);
+    rangeSumHelper(node.right, low, high, sum);
+    return sum.total;
 };
