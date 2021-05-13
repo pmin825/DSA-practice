@@ -13,7 +13,6 @@ const minDeletions = (s) => {
   const unique = new Set();
   for (const key in count) {
     while (unique.has(count[key])) {
-      console.log(unique, count[key]);
       deletions++;
       count[key] -= 1;
     }
