@@ -1,3 +1,21 @@
+// dfs solution
+
+const kthSmallest = (root, k) => {
+  return helper(root, k, []);
+};
+
+const helper = (node, k, arr) => {
+  if (!node) return;
+
+  helper(node.left, k, arr);
+  arr.push(node.val);
+  helper(node.right, k, arr);
+
+  return arr[k - 1];
+};
+
+// alternate solution
+
 const kthSmallest = (root, k) => {
   const values = [];
   const queue = [root];
