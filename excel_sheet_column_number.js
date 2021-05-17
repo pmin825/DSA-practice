@@ -9,3 +9,16 @@ const titleToNumber = (columnTitle) => {
 
   return answer;
 };
+
+// alt solution
+
+const titleToNumber = (columnTitle) => {
+  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let answer = 0;
+  for (let i = 0; i < columnTitle.length; i++) {
+      const char = columnTitle[i];
+      answer = answer * 26 + alpha.indexOf(char) + 1;
+  }
+  
+  return answer;
+};
