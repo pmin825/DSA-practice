@@ -2,7 +2,7 @@
  * @param {number[]} nums
  */
 var Solution = function (nums) {
-  this.original = nums;
+    this.original = nums;
 };
 
 /**
@@ -10,7 +10,7 @@ var Solution = function (nums) {
  * @return {number[]}
  */
 Solution.prototype.reset = function () {
-  return this.original;
+    return this.original;
 };
 
 /**
@@ -18,18 +18,18 @@ Solution.prototype.reset = function () {
  * @return {number[]}
  */
 Solution.prototype.shuffle = function () {
-  const shuffled = this.original.slice();
-  const swap = (arr, i, j) => {
-    const temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-  };
+    const shuffled = this.original.slice();
+    const swap = (arr, i, j) => {
+        const temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    };
 
-  for (let i = 0; i < shuffled.length; i++) {
-    swap(shuffled, i, Math.floor(Math.random() * shuffled.length));
-  }
+    for (let i = 0; i < shuffled.length; i++) {
+        swap(shuffled, i, Math.floor(Math.random() * shuffled.length));
+    }
 
-  return shuffled;
+    return shuffled;
 };
 
 /**

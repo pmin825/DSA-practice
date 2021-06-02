@@ -12,31 +12,31 @@
  * @return {TreeNode}
  */
 const buildTree = (preorder, inorder) => {
-  const indexLookUp = new Map();
-  for (let i = 0; i < inorder.length; i++) {
-    indexLookUp.set(inorder[i], i);
-  }
+    const indexLookUp = new Map();
+    for (let i = 0; i < inorder.length; i++) {
+        indexLookUp.set(inorder[i], i);
+    }
 
-  const helper = (preStart, preEnd, inStart, inEnd) => {
-    if (preStart > preEnd || inStart > inEnd) return null;
-    let value = preorder[preStart];
-    let index = indexLookUp.get(value);
-    let leftTreeNodeCount = index - inStart;
-    let root = new TreeNode(value);
-    root.left = helper(
-      preStart + 1,
-      preStart + leftTreeNodeCount,
-      inStart,
-      index - 1
-    );
-    root.right = helper(
-      preStart + leftTreeNodeCount + 1,
-      preEnd,
-      index + 1,
-      inEnd
-    );
-    return root;
-  };
+    const helper = (preStart, preEnd, inStart, inEnd) => {
+        if (preStart > preEnd || inStart > inEnd) return null;
+        let value = preorder[preStart];
+        let index = indexLookUp.get(value);
+        let leftTreeNodeCount = index - inStart;
+        let root = new TreeNode(value);
+        root.left = helper(
+            preStart + 1,
+            preStart + leftTreeNodeCount,
+            inStart,
+            index - 1
+        );
+        root.right = helper(
+            preStart + leftTreeNodeCount + 1,
+            preEnd,
+            index + 1,
+            inEnd
+        );
+        return root;
+    };
 
-  return helper(0, preorder.length - 1, 0, inorder.length - 1);
+    return helper(0, preorder.length - 1, 0, inorder.length - 1);
 };
