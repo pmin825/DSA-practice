@@ -1,23 +1,25 @@
 class BinaryTree {
-    constructor(value) {
-        this.value = value;
-        this.left = null;
-        this.right = null;
-    }
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
 }
 
 function branchSums(root) {
-    const sums = [];
-    branchSumsHelper(root, 0, sums);
-    return sums;
+  const results = [];
+  branchSumsHelper(root, 0, results);
+  return results;
 }
 
-function branchSumsHelper(node, runningSum, sums) {
-    if (node === null) return;
+function branchSumsHelper(node, runningSum, results) {
+  if (!node) return;
 
-    let newRunningSum = runningSum + node.value;
-    if (node.left === null && node.right === null) sums.push(newRunningSum);
+  if (!node.left && !node.right) {
+    results.push(runningSum + node.value);
+    return;
+  }
 
-    branchSumsHelper(node.left, newRunningSum, sums);
-    branchSumsHelper(node.right, newRunningSum, sums);
+  branchSumsHelper(node.left, runningSum + node.value, results);
+  branchSumsHelper(node.right, runningSum + node.value, results);
 }
