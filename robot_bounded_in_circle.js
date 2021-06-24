@@ -1,9 +1,9 @@
 const isRobotBounded = (instructions) => {
-  let [x, y, dx, dy] = [0, 0, 0, 1];
+  let x = 0, y = 0, dx = 0, dy = 1;
   
-  for (let dir of instructions) {
-      if(dir == 'R') [dx, dy] = [dy, -dx];
-      else if(dir == 'L') [dx, dy] = [-dy, dx]
+  for (const dir of instructions) {
+      if (dir === "L") [dx, dy] = [-dy, dx]
+      else if (dir === "R") [dx, dy] = [dy, -dx]
       else [x, y] = [x + dx, y + dy];
   }
   
