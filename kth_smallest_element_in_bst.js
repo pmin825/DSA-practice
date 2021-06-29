@@ -1,15 +1,15 @@
 // dfs solution
 
-const kthSmallest = (root, k) => {
-  return helper(root, k, []);
+var kthSmallest = function (root, k) {
+  return kthSmallestHelper(root, k, []);
 };
 
-const helper = (node, k, arr) => {
+const kthSmallestHelper = (node, k, arr) => {
   if (!node) return;
 
-  helper(node.left, k, arr);
+  kthSmallestHelper(node.left, k, arr);
   arr.push(node.val);
-  helper(node.right, k, arr);
+  kthSmallestHelper(node.right, k, arr);
 
   return arr[k - 1];
 };
